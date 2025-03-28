@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>自販機マップ共同作成プロジェクト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+    <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-6 bg-blue-600 text-white">
+            <h1 class="text-2xl font-bold">自販機マップ 〜みんなで作る地域の自販機情報〜</h1>
+        </div>
+        
+        <div class="p-6">
+            <iframe 
+                src="https://www.google.com/maps/d/u/1/embed?mid=1M8JKBRaOroSGCRikw2AslRwTppf2kbQ&ehbc=2E312F&noprof=1" 
+                width="100%" 
+                height="480" 
+                class="rounded-lg shadow-md mb-6"
+            ></iframe>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <h2 class="text-xl font-semibold text-blue-800 mb-3">
+                    📍 みんなの力で自販機マップを育てよう！
+                </h2>
+                <p class="text-blue-700">
+                    地域の自販機情報を共有して、誰もが便利に使えるマップを一緒に作りましょう。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg mb-3">🌟 投稿できる情報</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>自販機の正確な位置</li>
+                        <li>自販機の種類や設置場所</li>
+                        <li>商品の特徴や在庫状況</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg mb-3">🚫 投稿を控えるもの</h3>
+                    <ul class="list-disc list-inside space-y-2 text-red-700">
+                        <li>個人を特定できる情報</li>
+                        <li>他人のプライバシーを侵害する画像</li>
+                        <li>不適切または誹謗中傷的な内容</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a 
+                    href="https://forms.gle/YOUR_GOOGLE_FORM_LINK" 
+                    target="_blank" 
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-block shadow-md"
+                >
+                    🗺️ 自販機情報を投稿する
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-gray-100 p-4 text-center text-sm text-gray-600">
+            © 2024 自販機マップ プロジェクト | 
+            <a href="#" class="text-blue-500">プライバシーポリシー</a>
+        </div>
+    </div>
+</body>
+</html>
