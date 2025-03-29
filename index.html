@@ -2,46 +2,179 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/images/favicon/favicon.png">
     <title>ジハンピマップ</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+        }
+        
+        .map-container {
+            position: relative;
+            padding-bottom: 90%; /* iframeの縦の表示エリアを拡大 */
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(72, 187, 120, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+            }
+        }
+        
+        .bg-gradient {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+        
+        /* モーダル関連のスタイル */
+        .modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow-y: auto;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f3f4f6;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .close-button:hover {
+            background-color: #e5e7eb;
+        }
+        
+        /* スマホ表示の最適化 */
+        @media (max-width: 640px) {
+            .map-container {
+                padding-bottom: 120%; /* スマホでさらに縦長に表示 */
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
-    <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="p-6 bg-blue-600 text-white">
-            <h1 class="text-2xl font-bold">ジハンピマップ 〜みんなで作る地自販機情報〜</h1>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-6">
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl overflow-hidden">
+        <!-- ヘッダー部分 -->
+        <div class="p-4 sm:p-6 bg-gradient text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 opacity-10">
+                <!-- 装飾的な背景要素 -->
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#FFFFFF" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,89.9,-16.3,88.8,-0.6C87.7,15,83,30,74.9,43.2C66.8,56.4,55.4,67.8,42,74.3C28.7,80.7,14.4,82.2,-0.2,82.5C-14.7,82.7,-29.5,81.6,-41.9,75.3C-54.3,69,-64.5,57.4,-70.5,44.3C-76.6,31.3,-78.6,15.6,-79.2,-0.3C-79.8,-16.3,-79,-32.5,-72.2,-45.5C-65.3,-58.5,-52.3,-68.3,-38.5,-75.6C-24.8,-82.9,-12.4,-87.8,1.2,-89.8C14.7,-91.8,29.5,-91,44.7,-76.4Z" transform="translate(100 100)" />
+                </svg>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-bold relative z-10 animate__animated animate__fadeIn">
+                <span class="inline-block mr-2">🗺️</span> ジハンピマップ
+            </h1>
+            <p class="text-blue-100 mt-1 sm:mt-2 relative z-10 animate__animated animate__fadeIn animate__delay-1s">
+                〜みんなで作る自販機情報〜
+            </p>
         </div>
         
-        <div class="p-6">
-            <iframe 
-                src="https://www.google.com/maps/d/u/1/embed?mid=1M8JKBRaOroSGCRikw2AslRwTppf2kbQ&ehbc=2E312F&noprof=1" 
-                width="100%" 
-                height="480" 
-                class="rounded-lg shadow-md mb-6"
-            ></iframe>
+        <div class="p-4 sm:p-6">
+            <!-- マップ部分 - より縦に広く表示 -->
+            <div class="map-container mb-6 animate__animated animate__fadeIn animate__delay-1s">
+                <iframe 
+                    src="https://www.google.com/maps/d/u/1/embed?mid=1M8JKBRaOroSGCRikw2AslRwTppf2kbQ&ehbc=2E312F&noprof=1" 
+                    allowfullscreen
+                ></iframe>
+            </div>
 
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                <h2 class="text-xl font-semibold text-blue-800 mb-3">
-                    📍 みんなの力で自販機マップを育てよう！
+            <!-- 説明部分 -->
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r-lg animate__animated animate__fadeInUp animate__delay-2s card-hover">
+                <h2 class="text-lg sm:text-xl font-semibold text-blue-800 mb-2 flex items-center">
+                    <span class="inline-block mr-2">📍</span> みんなの力で自販機マップを育てよう！
                 </h2>
-                <p class="text-blue-700">
+                <p class="text-blue-700 text-sm sm:text-base">
                     地域の自販機情報を共有して、誰もが便利に使えるマップを一緒に作りましょう。
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-bold text-lg mb-3">🌟 投稿できる情報</h3>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <!-- 情報グリッド - スマホでは縦並び -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg shadow-md card-hover animate__animated animate__fadeInLeft animate__delay-3s">
+                    <h3 class="font-bold text-base sm:text-lg mb-3 flex items-center text-blue-800">
+                        <span class="inline-block mr-2 text-yellow-500">🌟</span> 投稿できる情報
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm sm:text-base">
                         <li>自販機の正確な位置(GoogleMap座標)</li>
                         <li>自販機の設置場所や色・目印</li>
-                        <li>自販機のラインナップ</li></li>
+                        <li>自販機の商品ラインナップ</li>
                     </ul>
                 </div>
                 
-                <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-bold text-lg mb-3">🚫 投稿を控えるもの</h3>
-                    <ul class="list-disc list-inside space-y-2 text-red-700">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded-lg shadow-md card-hover animate__animated animate__fadeInRight animate__delay-3s">
+                    <h3 class="font-bold text-base sm:text-lg mb-3 flex items-center text-red-800">
+                        <span class="inline-block mr-2">🚫</span> 投稿を控えるもの
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-red-700 text-sm sm:text-base">
                         <li>個人を特定できる情報</li>
                         <li>他人のプライバシーを侵害するような内容</li>
                         <li>不適切または誹謗中傷的な内容</li>
@@ -49,21 +182,100 @@
                 </div>
             </div>
 
-            <div class="mt-6 text-center">
+            <!-- 投稿ボタン -->
+            <div class="mt-6 text-center animate__animated animate__fadeInUp animate__delay-4s">
                 <a 
                     href="https://docs.google.com/forms/d/e/1FAIpQLSfEVt0TZqJGOux5KqW77H76FPIUNdm4phmFHCYgHX5gCN75FA/viewform?usp=sharing" 
                     target="_blank" 
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-block shadow-md"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-block shadow-lg btn-pulse"
                 >
-                    🗺️ 自販機情報を投稿する(GoogleForm)
+                    🗺️ 自販機情報を投稿する
                 </a>
             </div>
         </div>
 
+        <!-- フッター部分 -->
         <div class="bg-gray-100 p-4 text-center text-sm text-gray-600">
             © 2025 ジハンピマップ プロジェクト | 
-            <a href="#" class="text-blue-500">プライバシーポリシー</a>
+            <!-- プライバシーポリシーリンク -->
+            <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300" id="privacyLink">
+                プライバシーポリシー
+            </a>
         </div>
     </div>
+
+    <!-- モーダルオーバーレイ - 別の場所に配置し、全画面表示に修正 -->
+    <div id="privacyModal" class="modal-container">
+        <div class="modal-content">
+            <!-- 閉じるボタン - 右上に配置 -->
+            <button id="closeModal" class="close-button">&times;</button>
+            
+            <!-- ポリシーコンテンツ - 左寄せ -->
+            <div class="text-left">
+                <h1 class="text-xl sm:text-2xl font-bold mb-4 pb-2 border-b border-gray-200">プライバシーポリシー・利用規約</h1>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">1. 総則</h2>
+                <p class="mb-3">本プライバシーポリシー・利用規約は、ジハンピマップ（以下「本サイト」）の利用条件を定めるものです。閲覧者は本サイトを利用することにより、本規約に同意したものとみなされます。</p>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">2. クッキー（Cookie）について</h2>
+                <p class="mb-3">本サイトでは、利便性向上のためにクッキーを使用することがあります。クッキーの利用を希望しない場合は、ブラウザの設定で無効化することができます。ただし、無効化すると一部の機能が利用できなくなる場合があります。</p>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">3. 免責事項</h2>
+                <ul class="list-disc pl-5 mb-3">
+                    <li class="mb-1">ジハンピマップは、有志によって収集されたジハンピ付きのSuntory自販機の設置場所情報をマップにまとめたものです。</li>
+                    <li class="mb-1">「ジハンピ」はSuntoryの商標登録であり、同社に帰属します。</li>
+                    <li class="mb-1">投稿やコメントにおいて誹謗中傷や不適切な表現は禁止します。</li>
+                    <li class="mb-1">掲載された情報の正確性については保証できません。情報によって生じた損害や不利益について、本サイトは一切の責任を負いません。</li>
+                </ul>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">4. プライバシーポリシーの変更</h2>
+                <p class="mb-3">本プライバシーポリシーは、必要に応じて変更されることがあります。変更があった場合は、本サイト上で通知し、最新のポリシーを掲載します。</p>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">5. お問い合わせ</h2>
+                <p class="mb-3">本プライバシーポリシーに関するお問い合わせは、以下のGoogle Formからお願いいたします。<a href="https://forms.gle/Merm6JbWtTWoLjQc7" class="text-blue-600 hover:text-blue-800">お問い合わせフォーム</a></p>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">6. 利用者の責任</h2>
+                <p class="mb-3">閲覧者は、本サイトの利用にあたり、自己の責任において行うものとします。本サイトを通じて提供される情報の利用により生じた損害について、運営者は責任を負いません。</p>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">7. 禁止事項</h2>
+                <p class="mb-1">本サイトにおいて、以下の行為を禁止します：</p>
+                <ul class="list-disc pl-5 mb-3">
+                    <li class="mb-1">法令または公序良俗に反する行為</li>
+                    <li class="mb-1">他の閲覧者や第三者の権利を侵害する行為</li>
+                    <li class="mb-1">サイトの運営を妨げる行為</li>
+                    <li class="mb-1">不正確または虚偽の情報を投稿する行為</li>
+                </ul>
+                
+                <h2 class="text-lg font-semibold mt-5 mb-2">8. サイトの変更・中断・終了</h2>
+                <p class="mb-3">運営者は、予告なく本サイトの内容の変更、提供の中断または終了をすることがあります。これにより閲覧者に生じた損害について、運営者は一切の責任を負いません。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // プライバシーポリシーリンクがクリックされたときの処理
+        document.getElementById('privacyLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            var modal = document.getElementById('privacyModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // スクロール防止
+        });
+        
+        // 閉じるボタンがクリックされたときの処理
+        document.getElementById('closeModal').addEventListener('click', function() {
+            var modal = document.getElementById('privacyModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // スクロール許可
+        });
+        
+        // モーダル外がクリックされたときの処理
+        document.getElementById('privacyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                document.body.style.overflow = ''; // スクロール許可
+            }
+        });
+    </script>
 </body>
 </html>
