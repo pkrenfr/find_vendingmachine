@@ -188,14 +188,73 @@
                 </div>
             </div>
 
-            <!-- 投稿ボタン -->
-            <div class="mt-8 text-center animate__animated bg-blue-100 p-6 rounded-xl shadow-lg border-2 border-blue-500">
-              <h3 class="text-xl font-bold text-blue-800 mb-3">📍 みんなで自販機マップを充実させよう！</h3>
-              <p class="text-gray-700 mb-4">あなたの知っている情報が、みんなの役に立ちます</p>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEVt0TZqJGOux5KqW77H76FPIUNdm4phmFHCYgHX5gCN75FA/viewform?usp=sharing" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-full transition duration-300 inline-block shadow-xl btn-pulse text-lg transform hover:scale-105">
-                🗺️ 設置情報を共有する<br>GoogleForm
-              </a>
-            </div>
+<!-- 投稿ボタン部分をフォームに置き換え -->
+<div class="mt-8 text-center animate__animated bg-blue-100 p-6 rounded-xl shadow-lg border-2 border-blue-500">
+    <h3 class="text-xl font-bold text-blue-800 mb-3">📍 みんなで自販機マップを充実させよう！</h3>
+    <p class="text-gray-700 mb-4">あなたの知っている情報が、みんなの役に立ちます</p>
+    
+    <div class="form-container w-full max-w-lg mx-auto">
+      <form
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfEVt0TZqJGOux5KqW77H76FPIUNdm4phmFHCYgHX5gCN75FA/formResponse"
+          method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-4">
+          <div class="text-left">
+              <label class="block text-blue-800 font-medium mb-1" for="field-location">
+                  ジハンピ設置場所
+                  <span class="text-xs text-white bg-red-500 px-2 py-0.5 ml-2 rounded-full">必須</span>
+              </label>
+              <input name="entry.1001790811" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  id="field-location" 
+                  placeholder="施設名、座標などを記入してください"
+                  type="text" required="required" />
+          </div>
+          <div class="text-left">
+              <label class="block text-blue-800 font-medium mb-1" for="field-memo">
+                  メモ
+              </label>
+              <input name="entry.969016793" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  id="field-memo" 
+                  placeholder="見つけやすい目印などを記入してください"
+                  type="text" />
+          </div>
+          <div class="mt-6">
+              <button type="submit" 
+                  class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl btn-pulse transform hover:scale-105">
+                  📍 設置情報を送信する
+              </button>
+          </div>
+      </form>
+      <!-- 隠しiframe（リダイレクトを防ぐ） -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display: none;" onload="if(submitted) showThanksPopup();"></iframe>
+      <!-- ポップアップの Thanks メッセージ -->
+      <div id="thankYouPopup" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-80 p-5 text-white rounded-lg text-center z-50 w-4/5 max-w-sm">
+          <button onclick="closePopup()" class="absolute top-2 right-3 bg-transparent border-none text-white text-xl cursor-pointer">✖</button>
+          <p class="mt-5 mb-2">🎉 ご回答ありがとうございました！ 🎉</p>
+      </div>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+      let submitted = false;
+      function showThanksPopup() {
+          // フォームが送信され、Googleフォームの処理が完了したらポップアップ表示
+          document.getElementById("thankYouPopup").classList.remove("hidden");
+          document.getElementById("thankYouPopup").classList.add("block");
+          // フォームをリセット（初期化）
+          document.querySelector("form").reset();
+          // フラグをリセット
+          submitted = false;
+      }
+      function closePopup() {
+          document.getElementById("thankYouPopup").classList.remove("block");
+          document.getElementById("thankYouPopup").classList.add("hidden");
+      }
+      // ページ読み込み時にフォームをリセット
+      window.onload = function() {
+          document.querySelector("form").reset();
+      };
+  </script>
         </div>
 
         <!-- フッター部分 -->
