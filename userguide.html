@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,55 @@
 
         .bg-gradient {
             background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+    </style>
+    <style>
+        .modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow-y: auto;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f3f4f6;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-button:hover {
+            background-color: #e5e7eb;
         }
     </style>
 </head>
@@ -37,10 +87,10 @@
                 <h2 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-200">
                     🗺️ マップの使い方
                 </h2>
-                
+
                 <div class="space-y-4 text-gray-700">
                     <p>マップでジハンピの設置情報を見ることができます。</p>
-                    
+
                     <div class="bg-yellow-50 p-4 rounded-lg space-y-2 text-sm">
                         <p>※皆様の情報提供を元に作成された非公式マップです。</p>
                         <p>※このマップ利用に伴い発生した不利益は本サイトの管理者は一切の責任を負いません。</p>
@@ -71,10 +121,10 @@
                 <h2 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-200">
                     📝 情報提供フォームの使い方
                 </h2>
-                
+
                 <div class="space-y-4 text-gray-700">
                     <p>あなたが実際に見かけたジハンピの設置場所を送信することができます。</p>
-                    
+
                     <div class="bg-blue-50 p-4 rounded-lg space-y-2 text-sm">
                         <p>※この提供情報を元にマップが作成されています</p>
                         <p>※記載内容をご確認の上、「目撃情報を送信する」ボタンで送信ください</p>
@@ -91,13 +141,14 @@
                 <h2 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-200">
                     📱 ホーム画面・ブックマークへの追加
                 </h2>
-                
+
                 <div class="space-y-4 text-gray-700">
                     <p>より簡単にアクセスするために、スマートフォンのホーム画面に追加することができます。</p>
-                    <p class="text-sm text-gray-600">※PCの場合はブックマーク登録してください</p>
+                    <p class="text-sm text-gray-600">※PCの場合はブックマーク登録をご利用ください。</p>
 
                     <div class="bg-gray-50 p-4 rounded-lg">
-                        <img src="assets/images/userguide/usage_favorite.jpg" alt="ホーム画面追加の手順" class="w-full rounded-lg">
+                        <img src="assets/images/userguide/usage_favorite.jpg" alt="ホーム画面追加の手順"
+                            class="w-full rounded-lg">
                     </div>
                 </div>
             </div>
@@ -114,5 +165,46 @@
             </a>
         </div>
     </div>
+
+    <!-- モーダルオーバーレイ -->
+    <div id="privacyModal" class="modal-container">
+        <div class="modal-content">
+            <button id="closeModal" class="close-button">&times;</button>
+            <div id="privacy-policy-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // プライバシーポリシーの読み込みと表示制御
+        document.getElementById('privacyLink').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // プライバシーポリシーの内容を読み込み
+            fetch('privacy-policy.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('privacy-policy-content').innerHTML = html;
+                    document.getElementById('privacyModal').style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                })
+                .catch(error => console.error('プライバシーポリシーの読み込みに失敗しました:', error));
+        });
+
+        // 閉じるボタンの処理
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = '';
+        });
+
+        // モーダル外クリックでの閉じる処理
+        document.getElementById('privacyModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
 </body>
+
 </html>
