@@ -7,7 +7,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5232260147121373"
         crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="assets/images/favicon/favicon.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://find-vendingmachines.com/assets/images/favicon/favicon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180"
+        href="https://find-vendingmachines.com/assets/images/favicon/favicon.png">
     <title>【目標1万件!】発見ジハンピ（非公式ジハンピマップ）</title>
     <!-- GoatCounter -->
     <script data-goatcounter="https://webapps.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -225,7 +226,7 @@
                             </label>
                             <input name="entry.969016793"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                id="field-memo" placeholder="見つけやすい目印などを記入してください" type="text" required="required"/>
+                                id="field-memo" placeholder="見つけやすい目印などを記入してください" type="text" required="required" />
                         </div>
                         <!-- 注意書き追加 -->
                         <div class="text-left text-xs text-gray-600 mt-3 mb-2 px-2">
@@ -246,7 +247,8 @@
                             </ul>
                         </div>
                         <div class="mt-6">
-                            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl btn-pulse transform hover:scale-105">
+                            <button type="submit"
+                                class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl btn-pulse transform hover:scale-105">
                                 📍 目撃情報を送信する
                             </button>
                         </div>
@@ -264,9 +266,34 @@
                 </div>
             </div>
 
+            <!-- フローティングボタン -->
+            <div class="fixed right-4 top-1/2 transform -translate-y-1/2 z-50">
+                <button class="bg-white p-2 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 group"
+                    onclick="scrollToBookmark()">
+                    <div class="relative">
+                        <img src="assets/images/favicon/favicon.png" alt="ホーム画面への追加アイコン" class="w-12 h-12 rounded-full">
+                        <!-- ツールチップ -->
+                        <div
+                            class="absolute right-full mr-2 top-1/2 -translate-y-1/2 hidden group-hover:block bg-black text-white text-sm py-1 px-2 rounded whitespace-nowrap">
+                            ホーム画面に追加する
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <!-- JavaScript -->
+            <script>
+                function scrollToBookmark() {
+                    document.getElementById('bookmark-section').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            </script>
+
             <!-- このツールをよく使う方へセクション -->
             <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-4 text-blue-800 pb-1 border-b-2 border-blue-300 inline-block">
+                <h2 id="bookmark-section"
+                    class="text-xl font-bold mb-4 text-blue-800 pb-1 border-b-2 border-blue-300 inline-block" 　>
                     🔖 このツールをよく使う方へ
                 </h2>
 
