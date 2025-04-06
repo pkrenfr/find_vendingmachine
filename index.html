@@ -267,7 +267,7 @@
             </div>
 
             <!-- フローティングボタン -->
-            <div class="fixed right-4 top-1/2 transform -translate-y-1/2 z-50">
+            <div class="fixed right-4 bottom-4 md:bottom-8 z-50">
                 <button class="bg-white p-2 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 group"
                     onclick="scrollToBookmark()">
                     <div class="relative">
@@ -480,88 +480,48 @@
         <!-- フッター部分 -->
         <div class="bg-gray-100 p-4 text-center text-sm text-gray-600">
             © 2025 ジハンピマップ プロジェクト |
-            <!-- プライバシーポリシーリンク -->
             <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300" id="privacyLink">
                 プライバシーポリシー
             </a>
         </div>
     </div>
 
-    <!-- モーダルオーバーレイ - 別の場所に配置し、全画面表示に修正 -->
+
+    <!-- モーダルオーバーレイ -->
     <div id="privacyModal" class="modal-container">
         <div class="modal-content">
-            <!-- 閉じるボタン - 右上に配置 -->
             <button id="closeModal" class="close-button">&times;</button>
-
-            <!-- ポリシーコンテンツ - 左寄せ -->
-            <div class="text-left">
-                <h1 class="text-xl sm:text-2xl font-bold mb-4 pb-2 border-b border-gray-200">プライバシーポリシー・利用規約</h1>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">1. 総則</h2>
-                <p class="mb-3">本プライバシーポリシー・利用規約は、ジハンピマップ（以下「本サイト」）の利用条件を定めるものです。閲覧者は本サイトを利用することにより、本規約に同意したものとみなされます。
-                </p>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">2. クッキー（Cookie）について</h2>
-                <p class="mb-3">
-                    本サイトでは、利便性向上のためにクッキーを使用することがあります。クッキーの利用を希望しない場合は、ブラウザの設定で無効化することができます。ただし、無効化すると一部の機能が利用できなくなる場合があります。
-                </p>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">3. 免責事項</h2>
-                <ul class="list-disc pl-5 mb-3">
-                    <li class="mb-1">ジハンピマップは、有志によって収集されたジハンピ付きのSuntory自販機の設置場所情報をマップにまとめたものです。</li>
-                    <li class="mb-1">「ジハンピ」はSuntoryの商標登録であり、同社に帰属します。</li>
-                    <li class="mb-1">投稿やコメントにおいて誹謗中傷や不適切な表現は禁止します。</li>
-                    <li class="mb-1">掲載された情報の正確性については保証できません。情報によって生じた損害や不利益について、本サイトは一切の責任を負いません。</li>
-                </ul>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">4. プライバシーポリシーの変更</h2>
-                <p class="mb-3">本プライバシーポリシーは、必要に応じて変更されることがあります。変更があった場合は、本サイト上で通知し、最新のポリシーを掲載します。</p>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">5. お問い合わせ</h2>
-                <p class="mb-3">本プライバシーポリシーに関するお問い合わせは、以下のGoogle Formからお願いいたします。<a
-                        href="https://forms.gle/Merm6JbWtTWoLjQc7"
-                        class="text-blue-600 hover:text-blue-800">お問い合わせフォーム</a></p>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">6. 利用者の責任</h2>
-                <p class="mb-3">閲覧者は、本サイトの利用にあたり、自己の責任において行うものとします。本サイトを通じて提供される情報の利用により生じた損害について、運営者は責任を負いません。</p>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">7. 禁止事項</h2>
-                <p class="mb-1">本サイトにおいて、以下の行為を禁止します：</p>
-                <ul class="list-disc pl-5 mb-3">
-                    <li class="mb-1">法令または公序良俗に反する行為</li>
-                    <li class="mb-1">他の閲覧者や第三者の権利を侵害する行為</li>
-                    <li class="mb-1">サイトの運営を妨げる行為</li>
-                    <li class="mb-1">不正確または虚偽の情報を投稿する行為</li>
-                </ul>
-
-                <h2 class="text-lg font-semibold mt-5 mb-2">8. サイトの変更・中断・終了</h2>
-                <p class="mb-3">運営者は、予告なく本サイトの内容の変更、提供の中断または終了をすることがあります。これにより閲覧者に生じた損害について、運営者は一切の責任を負いません。</p>
-            </div>
+            <div id="privacy-policy-content"></div>
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
-        // プライバシーポリシーリンクがクリックされたときの処理
+        // プライバシーポリシーの読み込みと表示制御
         document.getElementById('privacyLink').addEventListener('click', function (e) {
             e.preventDefault();
-            var modal = document.getElementById('privacyModal');
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // スクロール防止
+
+            // プライバシーポリシーの内容を読み込み
+            fetch('privacy-policy.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('privacy-policy-content').innerHTML = html;
+                    document.getElementById('privacyModal').style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                })
+                .catch(error => console.error('プライバシーポリシーの読み込みに失敗しました:', error));
         });
 
-        // 閉じるボタンがクリックされたときの処理
+        // 閉じるボタンの処理
         document.getElementById('closeModal').addEventListener('click', function () {
-            var modal = document.getElementById('privacyModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = ''; // スクロール許可
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = '';
         });
 
-        // モーダル外がクリックされたときの処理
+        // モーダル外クリックでの閉じる処理
         document.getElementById('privacyModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 this.style.display = 'none';
-                document.body.style.overflow = ''; // スクロール許可
+                document.body.style.overflow = '';
             }
         });
     </script>

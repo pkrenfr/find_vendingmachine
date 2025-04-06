@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使い方ガイド - 発見ジハンピ（非公式ジハンピマップ）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+        }
+
+        .bg-gradient {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-6">
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl overflow-hidden">
+        <!-- ヘッダー -->
+        <div class="p-4 sm:p-6 bg-gradient text-white">
+            <h1 class="text-2xl sm:text-3xl font-bold">
+                📖 使い方ガイド
+            </h1>
+            <p class="text-blue-100 mt-2">
+                発見ジハンピ（非公式ジハンピマップ）の使い方
+            </p>
+        </div>
+
+        <div class="p-4 sm:p-6 space-y-8">
+            <!-- マップの使い方 -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                <h2 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-200">
+                    🗺️ マップの使い方
+                </h2>
+                
+                <div class="space-y-4 text-gray-700">
+                    <p>マップでジハンピの設置情報を見ることができます。</p>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg space-y-2 text-sm">
+                        <p>※皆様の情報提供を元に作成された非公式マップです。</p>
+                        <p>※このマップ利用に伴い発生した不利益は本サイトの管理者は一切の責任を負いません。</p>
+                        <p>※ジハンピはサントリーホールディングス株式会社の商標であり、サービス名の権利は同社に帰属いたします。</p>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <h3 class="font-semibold text-blue-700">ピンの使い方</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>ピンをクリックすると、目撃情報を確認できます</li>
+
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <img src="assets/images/userguide/usage_map.jpg" alt="マップの使用例" class="w-full rounded-lg">
+                    </div>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>施設名または座標をご確認ください</li>
+                        <li>見つけやすくなるメモの提供がある場合は説明欄に記載されています</li>
+                    </ul>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <img src="assets/images/userguide/usage_map_detail.jpg" alt="マップの使用例" class="w-full rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 情報提供フォーム -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                <h2 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-200">
+                    📝 情報提供フォームの使い方
+                </h2>
+                
+                <div class="space-y-4 text-gray-700">
+                    <p>あなたが実際に見かけたジハンピの設置場所を送信することができます。</p>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg space-y-2 text-sm">
+                        <p>※この提供情報を元にマップが作成されています</p>
+                        <p>※記載内容をご確認の上、「目撃情報を送信する」ボタンで送信ください</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <img src="assets/images/userguide/usage_form.jpg" alt="フォームの使用例" class="w-full rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ホーム画面追加 -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                <h2 class="text-xl font-bold mb-4 text-blue-800 pb-2 border-b border-blue-200">
+                    📱 ホーム画面・ブックマークへの追加
+                </h2>
+                
+                <div class="space-y-4 text-gray-700">
+                    <p>より簡単にアクセスするために、スマートフォンのホーム画面に追加することができます。</p>
+                    <p class="text-sm text-gray-600">※PCの場合はブックマーク登録してください</p>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <img src="assets/images/userguide/usage_favorite.jpg" alt="ホーム画面追加の手順" class="w-full rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- フッター -->
+
+        <!-- フッター部分 -->
+        <div class="bg-gray-100 p-4 text-center text-sm text-gray-600">
+            © 2025 ジハンピマップ プロジェクト |
+            <!-- プライバシーポリシーリンク -->
+            <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300" id="privacyLink">
+                プライバシーポリシー
+            </a>
+        </div>
+    </div>
+</body>
+</html>
