@@ -12,8 +12,8 @@
     <meta property="og:url" content="https://find-vendingmachines.com/">
     <meta property="og:image" content="https://find-vendingmachines.com/assets/images/userguide/usage_map.jpg"> 
     <meta property="og:locale" content="ja_JP">
-    <meta property="article:published_time" content="2025-03-03T00:00:00+09:00"/>
-    <meta property="article:modified_time" content="2025-04-09T00:00:00+09:00"/>
+    <meta property="article:published_time" content="2025-03-03T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2025-04-09T00:00:00+09:00" />
     <meta property="article:section" content="スマホ・携帯">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5232260147121373"
@@ -140,6 +140,29 @@
                 padding-bottom: 120%;
                 /* スマホでさらに縦長に表示 */
             }
+
+            /* スマホ表示時のH1タグのフォントサイズを調整 */
+            h1 {
+                font-size: 0.8rem !important;
+                padding: 0.2rem !important;
+            }
+
+            p.text-blue-100.sm\:mt-2.relative.z-10 {
+                font-size: 0.8rem !important;
+            }
+
+            /* スマホ表示時の説明テキストのフォントサイズを調整 */
+            .mt-4.p-4.bg-white.bg-opacity-20.rounded-lg.shadow-md.text-sm.sm\:text-base.text-white.relative.z-10 {
+                font-size: 0.7rem;
+                padding: 0.2rem !important;
+                margin-top: auto !important;
+            }
+
+            /* スマホ表示時の親divのパディングを調整 */
+            .p-4.sm\:p-6.bg-gradient.text-white.relative.overflow-hidden {
+                padding-top: 0.25rem !important;
+                padding-bottom: 0.3rem !important;
+            }
         }
     </style>
 </head>
@@ -159,12 +182,12 @@
             <h1 class="text-2xl sm:text-3xl font-bold relative z-10">
                 <span class="inline-block mr-2">🗺️</span>【目標1万件!】発見ジハンピ（非公式ジハンピマップ）
             </h1>
-            <p class="text-blue-100 mt-1 sm:mt-2 relative z-10">
+            <p class="text-blue-100 sm:mt-2 relative z-10">
                 〜みんなで作る自販機情報〜 <span class="text-xs ml-2">※非公式ファンサイト</span>
             </p>
             <!-- 説明テキスト部分 -->
-            <div itemprop="mainEntityOfPage
-                class="mt-4 p-4 bg-white bg-opacity-20 rounded-lg shadow-md text-sm sm:text-base text-white relative z-10">
+            <div itemprop="mainEntityOfPage" class=" mt-4 p-4 bg-white bg-opacity-20 rounded-lg shadow-md text-sm sm:text-base text-white relative
+                z-10">
                 本サイトはジハンピ設置場所に関する情報を収集し、設置場所の可視化と共有を目的としています。
             </div>
         </div>
