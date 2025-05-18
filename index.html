@@ -10,19 +10,18 @@
     <meta property="og:description" content="ジハンピの情報を投稿・共有しよう！ジハンピ設置スポットをみんなでシェア。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://find-vendingmachines.com/">
-    <meta property="og:image" content="https://find-vendingmachines.com/assets/images/userguide/usage_map.jpg"> 
+    <meta property="og:image" content="https://find-vendingmachines.com/assets/images/userguide/usage_map.jpg">
     <meta property="og:locale" content="ja_JP">
     <meta property="article:published_time" content="2025-03-03T00:00:00+09:00" />
     <meta property="article:modified_time" content="2025-04-09T00:00:00+09:00" />
     <meta property="article:section" content="スマホ・携帯">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5232260147121373"
         crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="assets/images/favicon/favicon.png">
     <link rel="apple-touch-icon" type="image/png" sizes="180x180"
         href="https://find-vendingmachines.com/assets/images/favicon/favicon.png">
     <title>発見ジハンピ（非公式ジハンピマップ）</title>
-    <!-- GoatCounter -->
     <script data-goatcounter="https://webapps.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -32,12 +31,12 @@
         body {
             font-family: 'Noto Sans JP', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+            padding-bottom: 80px; /* フローティングボタンのためのスペース */
         }
 
         .map-container {
             position: relative;
             padding-bottom: 90%;
-            /* iframeの縦の表示エリアを拡大 */
             height: 0;
             overflow: hidden;
             width: 100%;
@@ -54,16 +53,7 @@
             border: 0;
         }
 
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-pulse {
+        .btn-pulse { /* このアニメーションは新しいフローティングボタンでは使用しません */
             animation: pulse 2s infinite;
         }
 
@@ -85,7 +75,6 @@
             background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
         }
 
-        /* モーダル関連のスタイル */
         .modal-container {
             position: fixed;
             top: 0;
@@ -134,125 +123,158 @@
             background-color: #e5e7eb;
         }
 
-        /* スマホ表示の最適化 */
         @media (max-width: 640px) {
             .map-container {
                 padding-bottom: 120%;
-                /* スマホでさらに縦長に表示 */
             }
 
-            /* スマホ表示時のH1タグのフォントサイズを調整 */
-            h1 {
-                font-size: 0.8rem !important;
+            .header-area {
+                padding: 0.25rem 0.75rem !important;
+            }
+
+            h1.site-title {
+                font-size: 1.1rem !important;
+                padding: 0.1rem 0.2rem !important;
+                margin-bottom: 0.1rem !important;
+            }
+
+            p.site-subtitle {
+                font-size: 0.7rem !important;
+                margin-top: 0.1rem !important;
+            }
+
+            .header-description {
+                font-size: 0.65rem !important;
                 padding: 0.2rem !important;
-            }
-
-            p.text-blue-100.sm\:mt-2.relative.z-10 {
-                font-size: 0.8rem !important;
-            }
-
-            /* スマホ表示時の説明テキストのフォントサイズを調整 */
-            .mt-4.p-4.bg-white.bg-opacity-20.rounded-lg.shadow-md.text-sm.sm\:text-base.text-white.relative.z-10 {
-                font-size: 0.7rem;
-                padding: 0.2rem !important;
-                margin-top: auto !important;
-            }
-
-            /* スマホ表示時の親divのパディングを調整 */
-            .p-4.sm\:p-6.bg-gradient.text-white.relative.overflow-hidden {
-                padding-top: 0.25rem !important;
-                padding-bottom: 0.3rem !important;
+                margin-top: 0.2rem !important;
             }
         }
+        .carousel-slide {
+            min-height: 260px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .carousel-slide > div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0.75rem; 
+        }
+        @media (min-width: 640px) { 
+            .carousel-slide > div {
+                 padding: 1rem; 
+            }
+        }
+        .carousel-slide > div > *:last-child {
+            margin-top: auto;
+        }
+        .carousel-slide p { 
+            margin-bottom: 0.5rem; 
+        }
+        .carousel-slide .user-guide-link-container { 
+            margin-top: 0.5rem; 
+        }
+
+
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col items-center p-4 sm:p-6">
     <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl overflow-hidden">
-        <!-- ヘッダー部分 -->
-        <div class="p-4 sm:p-6 bg-gradient text-white relative overflow-hidden">
+        <div class="bg-gradient text-white relative overflow-hidden header-area"> 
             <div class="absolute top-0 right-0 w-40 h-40 opacity-10">
-                <!-- 装飾的な背景要素 -->
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#FFFFFF"
                         d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,89.9,-16.3,88.8,-0.6C87.7,15,83,30,74.9,43.2C66.8,56.4,55.4,67.8,42,74.3C28.7,80.7,14.4,82.2,-0.2,82.5C-14.7,82.7,-29.5,81.6,-41.9,75.3C-54.3,69,-64.5,57.4,-70.5,44.3C-76.6,31.3,-78.6,15.6,-79.2,-0.3C-79.8,-16.3,-79,-32.5,-72.2,-45.5C-65.3,-58.5,-52.3,-68.3,-38.5,-75.6C-24.8,-82.9,-12.4,-87.8,1.2,-89.8C14.7,-91.8,29.5,-91,44.7,-76.4Z"
                         transform="translate(100 100)" />
                 </svg>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-bold relative z-10">
+            <h1 class="text-2xl sm:text-3xl font-bold relative z-10 site-title"> 
                 <span class="inline-block mr-2">🗺️</span>【目標1万件!】発見ジハンピ（非公式ジハンピマップ）
             </h1>
-            <p class="text-blue-100 sm:mt-2 relative z-10">
+            <p class="text-blue-100 sm:mt-2 relative z-10 site-subtitle"> 
                 〜みんなで作る自販機情報〜 <span class="text-xs ml-2">※非公式ファンサイト</span>
             </p>
-            <!-- 説明テキスト部分 -->
-            <div itemprop="mainEntityOfPage" class=" mt-4 p-4 bg-white bg-opacity-20 rounded-lg shadow-md text-sm sm:text-base text-white relative
-                z-10">
+            <div itemprop="mainEntityOfPage" class="mt-4 p-4 bg-white bg-opacity-20 rounded-lg shadow-md text-sm sm:text-base text-white relative z-10 header-description"> 
                 本サイトはジハンピ設置場所に関する情報を収集し、設置場所の可視化と共有を目的としています。
             </div>
         </div>
 
         <div class="p-4 sm:p-6">
-            <!-- マップ部分 - より縦に広く表示 -->
             <div class="map-container mb-6 animate__animated">
                 <iframe
                     src="https://www.google.com/maps/d/u/1/embed?mid=1M8JKBRaOroSGCRikw2AslRwTppf2kbQ&ehbc=2E312F&noprof=1"
                     allowfullscreen></iframe>
             </div>
 
-            <!-- 説明部分 -->
-            <div class="border-l-4 border-blue-500 p-4 mb-6 rounded-r-lg animate__animated card-hover">
-                <h2 class="text-lg sm:text-xl font-semibold text-blue-800 mb-2 flex items-center">
-                    <span class="inline-block mr-2">📍</span> みんなの力で自販機マップを作ろう！
-                </h2>
-                <p class="text-blue-700 text-sm sm:text-base">
-                    地域の自販機情報を共有して、誰もが便利に使えるマップを一緒に作りましょう。
-                </p>
-                <a href="userguide.html"
-                    class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-300 shadow-md hover:shadow-lg">
-                    <span class="mr-2">📖</span>
-                    使い方ガイドを見る
-                </a>
-                <span class="mt-2 text-sm text-gray-600">
-                    ※初めての方は使い方ガイドをご確認ください
-                </span>
-            </div>
+            <div id="infoCarouselWrapper" class="relative w-full mx-auto mb-8 sm:mb-12"> 
+                <div id="infoCarousel" class="relative overflow-hidden rounded-lg shadow-lg bg-white">
+                    <div id="carouselSlides" class="flex transition-transform duration-700 ease-in-out">
+                        <div class="carousel-slide w-full flex-shrink-0"> 
+                            <div class="rounded-lg border-l-4 border-blue-500 bg-white">
+                                <h2 class="text-lg sm:text-xl font-semibold text-blue-800 mb-2 flex items-center">
+                                    <span class="inline-block mr-2">📍</span> みんなの力で自販機マップを作ろう！
+                                </h2>
+                                <p class="text-blue-700 text-sm sm:text-base"> 地域の自販機情報を共有して、誰もが便利に使えるマップを一緒に作りましょう。あなたの近所の隠れた一台が、誰かの「助かった！」に繋がるかもしれません。
+                                </p>
+                                <div class="mt-auto user-guide-link-container"> <a href="userguide.html"
+                                        class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-300 shadow-md hover:shadow-lg text-sm sm:text-base">
+                                        <span class="mr-2">📖</span>
+                                        使い方ガイドを見る
+                                    </a>
+                                    <span class="block mt-2 text-xs sm:text-sm text-gray-600">
+                                        ※初めての方は使い方ガイドをご確認ください
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- 情報グリッド - スマホでは縦並び -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <div class="bg-white p-4 rounded-lg shadow-md card-hover border-t-4 border-blue-500">
-                    <h3 class="font-bold text-base sm:text-lg mb-3 flex items-center text-blue-800">
-                        <span class="inline-block mr-2 text-yellow-500">🌟</span> 投稿できる情報
-                    </h3>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm sm:text-base">
-                        <li>自販機の正確な位置(GoogleMap座標など)</li>
-                        <li>自販機の設置場所や色・目印</li>
-                        <li>自販機の商品ラインナップ</li>
-                    </ul>
+                        <div class="carousel-slide w-full flex-shrink-0">
+                             <div class="rounded-lg border-t-4 border-blue-500 bg-white">
+                                <h3 class="font-bold text-base sm:text-lg mb-3 flex items-center text-blue-800">
+                                    <span class="inline-block mr-2 text-yellow-500">🌟</span> 投稿できる情報
+                                </h3>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm sm:text-base"> <li>自販機の正確な位置（住所、施設名、Googleマップの共有リンクや座標など）</li>
+                                    <li>自販機の種類（例：飲料、食品、珍しいもの、など）</li>
+                                    <li>特徴的な商品やサービス（例：キャッシュレス対応、特定のブランド専門、災害対応型など）</li>
+                                    <li>周辺の目印や外観の特徴（例：赤い屋根のお店の前、公園の入り口横、青い自販機）</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="carousel-slide w-full flex-shrink-0">
+                            <div class="rounded-lg border-t-4 border-red-500 bg-white">
+                                <h3 class="font-bold text-base sm:text-lg mb-3 flex items-center text-red-800">
+                                    <span class="inline-block mr-2">🚫</span> 投稿を控えるもの
+                                </h3>
+                                <ul class="list-disc list-inside space-y-1 text-red-700 text-sm sm:text-base"> <li>個人宅の敷地内など、プライベートな空間にあるもの（許可がある場合を除く）</li>
+                                    <li>他者のプライバシーを侵害する可能性のある写真や情報（人物の顔、車のナンバーなど）</li>
+                                    <li>不正確または誤解を招く情報、誹謗中傷</li>
+                                    <li>公序良俗に反する内容や、法律に触れる可能性のある情報</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-white p-4 rounded-lg shadow-md card-hover border-t-4 border-red-500">
-                    <h3 class="font-bold text-base sm:text-lg mb-3 flex items-center text-red-800">
-                        <span class="inline-block mr-2">🚫</span> 投稿を控えるもの
-                    </h3>
-                    <ul class="list-disc list-inside space-y-2 text-red-700 text-sm sm:text-base">
-                        <li>個人を特定できる情報</li>
-                        <li>他人のプライバシーを侵害するような内容</li>
-                        <li>不適切または誹謗中傷的な内容</li>
-                    </ul>
-                </div>
+                <button id="prevButton" aria-label="Previous slide" class="absolute top-1/2 left-[-10px] sm:left-[-15px] transform -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-2 rounded-full shadow-xl focus:outline-none z-10 transition-all duration-200 hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+                <button id="nextButton" aria-label="Next slide" class="absolute top-1/2 right-[-10px] sm:right-[-15px] transform -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-2 rounded-full shadow-xl focus:outline-none z-10 transition-all duration-200 hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
             </div>
-
-            <!-- 投稿ボタン部分をフォームに置き換え -->
-            <div
-                class="mt-8 text-center animate__animated bg-blue-100 p-6 rounded-xl shadow-lg border-2 border-blue-500">
+            
+            <div id="post-form-section" class="mt-8 text-center animate__animated bg-blue-100 p-6 rounded-xl shadow-lg border-2 border-blue-500">
                 <h3 class="text-xl font-bold text-blue-800 mb-3">📍 「ここにあった！」を共有しよう！</h3>
                 <p class="text-gray-700 mb-4">あなたの知っている情報が、みんなの役に立ちます</p>
 
                 <div class="form-container w-full max-w-lg mx-auto">
-                    <form
+                    <form onsubmit="submitted=true; disableSubmitTemporary();"
                         action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfEVt0TZqJGOux5KqW77H76FPIUNdm4phmFHCYgHX5gCN75FA/formResponse"
-                        method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-4">
+                        method="POST" target="hidden_iframe" class="space-y-4">
                         <div class="text-left">
                             <label class="block text-blue-800 font-medium mb-1" for="field-location">
                                 見つけたジハンピの場所
@@ -271,7 +293,6 @@
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 id="field-memo" placeholder="xxxの前にありました。" type="text" required="required" />
                         </div>
-                        <!-- 注意書き追加 -->
                         <div class="text-left text-xs text-gray-600 mt-3 mb-2 px-2">
                             <p class="font-semibold">情報収集の目的</p>
                             <p class="mb-1">本フォームは、ジハンピ設置場所に関する情報を収集し、設置場所の可視化と共有を目的としています。
@@ -290,16 +311,14 @@
                             </ul>
                         </div>
                         <div class="mt-6">
-                            <button type="submit"
-                                class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl btn-pulse transform hover:scale-105">
+                            <button type="submit" id="submitButton"
+                                class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl btn-pulse transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
                                 📍 目撃情報を送信する
                             </button>
                         </div>
                     </form>
-                    <!-- 隠しiframe（リダイレクトを防ぐ） -->
                     <iframe name="hidden_iframe" id="hidden_iframe" style="display: none;"
-                        onload="if(submitted) showThanksPopup();"></iframe>
-                    <!-- ポップアップの Thanks メッセージ -->
+                        onload="if(submitted) { disableSubmitTemporary(); showThanksPopup(); }"></iframe>
                     <div id="thankYouPopup"
                         class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-80 p-5 text-white rounded-lg text-center z-50 w-4/5 max-w-sm">
                         <button onclick="closePopup()"
@@ -309,13 +328,10 @@
                 </div>
             </div>
 
-            <!-- フローティングボタン -->
-            <div class="fixed right-4 bottom-4 md:bottom-8 z-50">
-                <button class="bg-white p-2 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 group"
+            <div class="fixed right-4 bottom-4 md:right-8 md:bottom-8 z-40"> <button class="bg-white p-2 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 group"
                     onclick="scrollToBookmark()">
                     <div class="relative">
                         <img src="assets/images/favicon/favicon.png" alt="ホーム画面への追加アイコン" class="w-12 h-12 rounded-full">
-                        <!-- ツールチップ -->
                         <div
                             class="absolute right-full mr-2 top-1/2 -translate-y-1/2 hidden group-hover:block bg-black text-white text-sm py-1 px-2 rounded whitespace-nowrap">
                             ホーム画面に追加する
@@ -323,20 +339,38 @@
                     </div>
                 </button>
             </div>
-            <!-- JavaScript -->
+
+            <div class="fixed left-1/2 bottom-4 transform -translate-x-1/2 z-40"> <button onclick="scrollToPostForm()"
+                    class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl transform hover:scale-105">
+                    ✍️ 投稿フォームへジャンプ
+                </button>
+            </div>
+
+
             <script>
                 function scrollToBookmark() {
-                    document.getElementById('bookmark-section').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    const bookmarkSection = document.getElementById('bookmark-section');
+                    if (bookmarkSection) {
+                        bookmarkSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+                function scrollToPostForm() {
+                    const postFormSection = document.getElementById('post-form-section');
+                    if (postFormSection) {
+                        postFormSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             </script>
 
-            <!-- このツールをよく使う方へセクション -->
             <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
                 <h2 id="bookmark-section"
-                    class="text-xl font-bold mb-4 text-blue-800 pb-1 border-b-2 border-blue-300 inline-block" 　>
+                    class="text-xl font-bold mb-4 text-blue-800 pb-1 border-b-2 border-blue-300 inline-block">
                     🔖 このツールをよく使う方へ
                 </h2>
 
@@ -345,33 +379,30 @@
 
                 <h4 class="text-md font-semibold text-blue-600 mb-2">手順</h4>
 
-                <!-- タブ切り替え機能 -->
                 <div class="mb-4">
                     <div class="border-b border-gray-300">
                         <ul class="flex flex-wrap -mb-px" id="device-tabs" role="tablist">
                             <li class="mr-2" role="presentation">
-                                <button class="inline-block p-4 border-b-2 border-blue-500 rounded-t-lg active"
+                                <button class="inline-block p-4 border-b-2 border-blue-500 text-blue-600 rounded-t-lg active"
                                     id="iphone-tab" data-tabs-target="#iphone-content" type="button" role="tab"
                                     aria-controls="iphone-content" aria-selected="true">iPhone</button>
                             </li>
                             <li class="mr-2" role="presentation">
                                 <button
-                                    class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600"
+                                    class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
                                     id="android-tab" data-tabs-target="#android-content" type="button" role="tab"
                                     aria-controls="android-content" aria-selected="false">Android</button>
                             </li>
                             <li role="presentation">
                                 <button
-                                    class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600"
+                                    class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
                                     id="pc-tab" data-tabs-target="#pc-content" type="button" role="tab"
                                     aria-controls="pc-content" aria-selected="false">PC</button>
                             </li>
                         </ul>
                     </div>
 
-                    <!-- タブコンテンツ -->
                     <div id="device-tab-content" class="border border-t-0 border-gray-300 rounded-b-lg">
-                        <!-- iPhone -->
                         <div class="p-4 rounded-lg bg-gray-50" id="iphone-content" role="tabpanel"
                             aria-labelledby="iphone-tab">
                             <div class="space-y-3">
@@ -380,8 +411,7 @@
                                         class="inline-flex justify-center items-center w-6 h-6 mr-3 bg-blue-500 text-white rounded-full flex-shrink-0">1</span>
                                     Safariの下のバーの共有ボタン
                                     <img src="assets/images/safari_share_button.png" alt="iPhone 共有ボタン"
-                                        class="inline-block mx-1 h-6 w-auto">
-                                    をタップ。
+                                        class="inline-block mx-1 h-6 w-auto align-middle"> をタップ。
                                 </p>
                                 <p class="flex items-start">
                                     <span
@@ -410,7 +440,6 @@
                             </div>
                         </div>
 
-                        <!-- Android -->
                         <div class="hidden p-4 rounded-lg bg-gray-50" id="android-content" role="tabpanel"
                             aria-labelledby="android-tab">
                             <div class="space-y-3">
@@ -437,7 +466,6 @@
                             </div>
                         </div>
 
-                        <!-- PC -->
                         <div class="hidden p-4 rounded-lg bg-gray-50" id="pc-content" role="tabpanel"
                             aria-labelledby="pc-tab">
                             <div class="space-y-3">
@@ -463,64 +491,144 @@
                 </div>
             </div>
 
-            <!-- タブ切り替え用のJavaScript - こちらのスクリプトを修正します -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                    // タブ切り替え機能
                     const tabs = document.querySelectorAll('[data-tabs-target]');
-                    const tabContents = document.querySelectorAll('[role="tabpanel"]');
+                    const tabContents = document.querySelectorAll('#device-tab-content [role="tabpanel"]'); 
+                    const tabList = document.getElementById('device-tabs');
 
-                    tabs.forEach(tab => {
-                        tab.addEventListener('click', () => {
-                            const target = document.querySelector(tab.dataset.tabsTarget);
+                    if (tabList) { 
+                        tabs.forEach(tab => {
+                            tab.addEventListener('click', () => {
+                                const targetSelector = tab.dataset.tabsTarget;
+                                const target = document.querySelector(targetSelector);
 
-                            // すべてのタブコンテンツを非表示にする
-                            tabContents.forEach(tabContent => {
-                                tabContent.classList.add('hidden');
+                                tabContents.forEach(tc => {
+                                    tc.classList.add('hidden');
+                                });
+
+                                tabs.forEach(t => {
+                                    t.classList.remove('border-blue-500', 'text-blue-600', 'active');
+                                    t.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                                    t.setAttribute('aria-selected', 'false');
+                                });
+
+                                tab.classList.add('border-blue-500', 'text-blue-600', 'active');
+                                tab.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                                tab.setAttribute('aria-selected', 'true');
+
+                                if (target) {
+                                    target.classList.remove('hidden');
+                                }
                             });
-
-                            // すべてのタブのアクティブ状態を解除
-                            tabs.forEach(t => {
-                                t.classList.remove('border-blue-500');
-                                t.classList.add('border-transparent');
-                                t.setAttribute('aria-selected', 'false');
-                            });
-
-                            // クリックされたタブをアクティブに
-                            tab.classList.remove('border-transparent');
-                            tab.classList.add('border-blue-500');
-                            tab.setAttribute('aria-selected', 'true');
-
-                            // 対応するコンテンツを表示
-                            target.classList.remove('hidden');
                         });
-                    });
+
+                        const initialActiveTab = document.querySelector('#device-tabs .active');
+                        if (initialActiveTab) {
+                            const initialTargetSelector = initialActiveTab.dataset.tabsTarget;
+                            const initialTarget = document.querySelector(initialTargetSelector);
+                            if (initialTarget) {
+                                initialTarget.classList.remove('hidden');
+                            }
+                        }
+                    }
+
+                    const carouselSlidesContainer = document.getElementById('carouselSlides');
+                    const carouselItems = document.querySelectorAll('.carousel-slide');
+                    const prevButton = document.getElementById('prevButton');
+                    const nextButton = document.getElementById('nextButton');
+                    const carouselWrapper = document.getElementById('infoCarouselWrapper'); 
+
+                    if (carouselSlidesContainer && carouselItems.length > 0 && prevButton && nextButton && carouselWrapper) {
+                        const totalSlides = carouselItems.length;
+                        let currentIndex = 0;
+                        let autoPlayInterval;
+                        const autoPlayDelay = 15000; 
+
+                        function updateCarousel() {
+                            carouselSlidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        }
+
+                        function showNextSlide() {
+                            currentIndex = (currentIndex + 1) % totalSlides;
+                            updateCarousel();
+                        }
+
+                        function showPrevSlide() {
+                            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                            updateCarousel();
+                        }
+
+                        function startAutoPlay() {
+                            stopAutoPlay(); 
+                            autoPlayInterval = setInterval(showNextSlide, autoPlayDelay);
+                        }
+
+                        function stopAutoPlay() {
+                            clearInterval(autoPlayInterval);
+                        }
+
+                        prevButton.addEventListener('click', () => {
+                            showPrevSlide();
+                            startAutoPlay(); 
+                        });
+
+                        nextButton.addEventListener('click', () => {
+                            showNextSlide();
+                            startAutoPlay(); 
+                        });
+                        
+                        carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
+                        carouselWrapper.addEventListener('mouseleave', startAutoPlay);
+
+                        startAutoPlay(); 
+                        updateCarousel(); 
+                    }
                 });
             </script>
 
             <script type="text/javascript">
                 let submitted = false;
+                function disableSubmitTemporary() {
+                    const submitButton = document.getElementById('submitButton');
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+                        setTimeout(() => {
+                            submitButton.disabled = false;
+                            submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                        }, 10000);
+                    }
+                }
                 function showThanksPopup() {
-                    // フォームが送信され、Googleフォームの処理が完了したらポップアップ表示
-                    document.getElementById("thankYouPopup").classList.remove("hidden");
-                    document.getElementById("thankYouPopup").classList.add("block");
-                    // フォームをリセット（初期化）
-                    document.querySelector("form").reset();
-                    // フラグをリセット
-                    submitted = false;
+                    const thankYouPopup = document.getElementById("thankYouPopup");
+                    const form = document.querySelector("form");
+
+                    if (thankYouPopup) {
+                        thankYouPopup.classList.remove("hidden");
+                        thankYouPopup.classList.add("block");
+                    }
+                    if (form) {
+                        form.reset();
+                    }
+                    submitted = false; 
                 }
                 function closePopup() {
-                    document.getElementById("thankYouPopup").classList.remove("block");
-                    document.getElementById("thankYouPopup").classList.add("hidden");
+                    const thankYouPopup = document.getElementById("thankYouPopup");
+                    if (thankYouPopup) {
+                        thankYouPopup.classList.remove("block");
+                        thankYouPopup.classList.add("hidden");
+                    }
                 }
-                // ページ読み込み時にフォームをリセット
                 window.onload = function () {
-                    document.querySelector("form").reset();
+                    const form = document.querySelector("form");
+                    if (form) {
+                        form.reset();
+                    }
                 };
             </script>
         </div>
 
-        <!-- フッター部分 -->
         <div class="bg-gray-100 p-4 text-center text-sm text-gray-600">
             © 2025 ジハンピマップ プロジェクト |
             <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300" id="privacyLink">
@@ -529,44 +637,54 @@
         </div>
     </div>
 
-
-    <!-- モーダルオーバーレイ -->
     <div id="privacyModal" class="modal-container">
         <div class="modal-content">
-            <button id="closeModal" class="close-button">&times;</button>
+            <button id="closeModal" class="close-button">×</button>
             <div id="privacy-policy-content"></div>
         </div>
     </div>
 
     <script>
-        // プライバシーポリシーの読み込みと表示制御
-        document.getElementById('privacyLink').addEventListener('click', function (e) {
-            e.preventDefault();
+        const privacyLink = document.getElementById('privacyLink');
+        const privacyModal = document.getElementById('privacyModal');
+        const closeModalButton = document.getElementById('closeModal');
+        const privacyPolicyContent = document.getElementById('privacy-policy-content');
 
-            // プライバシーポリシーの内容を読み込み
-            fetch('privacy-policy.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('privacy-policy-content').innerHTML = html;
-                    document.getElementById('privacyModal').style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                })
-                .catch(error => console.error('プライバシーポリシーの読み込みに失敗しました:', error));
-        });
+        if (privacyLink && privacyModal && closeModalButton && privacyPolicyContent) {
+            privacyLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                fetch('privacy-policy.html')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        privacyPolicyContent.innerHTML = html;
+                        privacyModal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden'; 
+                    })
+                    .catch(error => {
+                        console.error('プライバシーポリシーの読み込みに失敗しました:', error);
+                        privacyPolicyContent.innerHTML = '<p>コンテンツの読み込みに失敗しました。後ほど再試行してください。</p>';
+                        privacyModal.style.display = 'flex'; 
+                        document.body.style.overflow = 'hidden';
+                    });
+            });
 
-        // 閉じるボタンの処理
-        document.getElementById('closeModal').addEventListener('click', function () {
-            document.getElementById('privacyModal').style.display = 'none';
-            document.body.style.overflow = '';
-        });
+            closeModalButton.addEventListener('click', function () {
+                privacyModal.style.display = 'none';
+                document.body.style.overflow = ''; 
+            });
 
-        // モーダル外クリックでの閉じる処理
-        document.getElementById('privacyModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                this.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
+            privacyModal.addEventListener('click', function (e) {
+                if (e.target === this) { 
+                    this.style.display = 'none';
+                    document.body.style.overflow = ''; 
+                }
+            });
+        }
     </script>
 </body>
 
